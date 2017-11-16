@@ -1,0 +1,61 @@
+<div>
+    <table>
+            	<tr>
+                    <td width="100">ID: </td>
+                    <td><input type="number" id="id"/></td>
+                </tr>
+           		<tr>
+                    <td width="100">Nombre: </td>
+                    <td><input type="text" id="nombre"/></td>
+                </tr>
+                <tr>
+                    <td width="100">Apellido: </td>
+                    <td><input type="text" id="apellido"/></td>
+                </tr>
+                <tr>
+                    <td width="100">Email: </td>
+                    <td><input type="text" id="email"/></td>
+                </tr>
+                <tr>
+                    <td width="100">Usuario: </td>
+                    <td><input type="text" id="usuario"/></td>
+                </tr>
+                <tr>
+                    <td width="100">Contraseña: </td>
+                    <td><input type="password" id="clave"/></td>
+                </tr>
+                <tr>
+                    <td width="100">Estado: </td>
+                    <td><input type="number" id="estado"/></td>
+                </tr>
+            </table>
+    <br /> <br />
+    <a>Obtener Usuario</a>
+    <a>Actualizar Usuario</a>
+    <a>Agregar Usuario</a>
+    <a>Eliminar Usuario</a>
+    <br />
+        <br />
+        <p style="color: green">{{message}}</p>  
+        <p style="color:red">{{errorMessage}}</p>
+        <a>Obtener todos los Usuarios</a>
+        <br /> <br />
+        <table>
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Email</th>
+					<th>Usuario</th>
+				</tr>
+			</thead>
+		<tbody>
+			<tr>
+				<td width="100">{{usr.nombre}}</td>
+				<td width="100">{{usr.apellido}}</td>
+				<td width="100">{{usr.email}}</td>
+				<td width="100">{{usr.usuario}}</td>							
+			</tr>	
+		</tbody>
+		</table>
+</div>
