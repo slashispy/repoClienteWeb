@@ -1,61 +1,107 @@
+<h3 *ngIf="userIdToUpdate; else create">
+    Actualizando Usuario con id: {{userIdToUpdate}}
+</h3>
+
+<ng-template #create>
+    <h3> Crear Nuevo Usuario </h3>
+ </ng-template>
+
 <div>
-    <table>
-            	<tr>
-                    <td width="100">ID: </td>
-                    <td><input type="number" id="id"/></td>
-                </tr>
-           		<tr>
-                    <td width="100">Nombre: </td>
-                    <td><input type="text" id="nombre"/></td>
-                </tr>
-                <tr>
-                    <td width="100">Apellido: </td>
-                    <td><input type="text" id="apellido"/></td>
-                </tr>
-                <tr>
-                    <td width="100">Email: </td>
-                    <td><input type="text" id="email"/></td>
-                </tr>
-                <tr>
-                    <td width="100">Usuario: </td>
-                    <td><input type="text" id="usuario"/></td>
-                </tr>
-                <tr>
-                    <td width="100">Contraseña: </td>
-                    <td><input type="password" id="clave"/></td>
-                </tr>
-                <tr>
-                    <td width="100">Estado: </td>
-                    <td><input type="number" id="estado"/></td>
-                </tr>
-            </table>
-    <br /> <br />
-    <a>Obtener Usuario</a>
-    <a>Actualizar Usuario</a>
-    <a>Agregar Usuario</a>
-    <a>Eliminar Usuario</a>
-    <br />
-        <br />
-        <p style="color: green">{{message}}</p>  
-        <p style="color:red">{{errorMessage}}</p>
-        <a>Obtener todos los Usuarios</a>
-        <br /> <br />
+    <form [formGroup]="userForm" (ngSubmit)="onUserFormSubmit()">
         <table>
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>Email</th>
-					<th>Usuario</th>
-				</tr>
-			</thead>
-		<tbody>
-			<tr>
-				<td width="100">{{usr.nombre}}</td>
-				<td width="100">{{usr.apellido}}</td>
-				<td width="100">{{usr.email}}</td>
-				<td width="100">{{usr.usuario}}</td>							
-			</tr>	
-		</tbody>
-		</table>
-</div>
+            <!--<tr>
+                <td width="100">Id: </td>
+                <td><input type="number" id="id"/></td>
+            </tr>-->
+            <tr>
+                <td width="100">Nombre: </td>
+                <td><input formControlName="nombre" type="text"/>
+                    <label *ngIf="userForm.get('nombre').invalid && processValidation" [ngClass] = "'error'"> Nombre es requerido. </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="100">Apellido: </td>
+                <td><input formControlName="apellido" type="text"/>
+                    <label *ngIf="userForm.get('apellido').invalid && processValidation" [ngClass] = "'error'"> Apellido es requerido. </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="100">Email: </td>
+                <td><input formControlName="email" type="text"/>
+                    <label *ngIf="userForm.get('email').invalid && processValidation" [ngClass] = "'error'"> Email es requerido. </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="100">Usuario: </td>
+                <td><input formControlName="usuario" type="text"/>
+                    <label *ngIf="userForm.get('usuario').invalid && processValidation" [ngClass] = "'error'"> Usuario es requerido. </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="100">Contraseña: </td>
+                <td><input formControlName="clave" type="password"/>
+                    <label *ngIf="userForm.get('clave').invalid && processValidation" [ngClass] = "'error'"> Contraseña es requerido. </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="100">Estado: </td>
+                <td><input formControlName="estado" type="number"/>
+                    <label *ngIf="userForm.get('estado').invalid && processValidation" [ngClass] = "'error'"> Estado es requerido. </label> 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button *ngif="!userIdToUpdate">Crear</button>
+                    <button *ngif="userIdToUpdate">Actualizar</button>
+                    <button (click)="backToCreateUser()" *ngif="userIdToUpdate">Atras</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br />
+    <div *ngIf="statusCode; else processing">
+            <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+                 Usuario agregado correctamente.
+            </div>   
+            <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+                 Usuario ya existe.
+            </div>   	
+            <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+                 Usuario actualizado correctamente.
+            </div>   	      
+            <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+                 Usuario borrado correctamente.
+            </div>   	   
+            <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+                 Error Interno del Servidor.
+            </div>	
+    </div>
+
+    <ng-template #processing>
+        <img *ngIf="requestProcessing" src="assets/images/loading.gif">
+    </ng-template>
+    </div>
+        <h3>Usuarios</h3>
+        <table>
+            <tr>
+                <th> Id</th> 
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let user of allUsers" >
+                <td>{{user.id}}</td> 
+                <td>{{user.nombre}}</td> 
+                <td>{{user.apellido}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.usuario}}</td>
+                <td>{{user.estado}}</td>
+                <td><button type="button" (click)="loadUserToEdit(user.id)">Editar</button> </td> 
+                <td><button type="button" (click)="deleteUser(user.id)">Borrar</button></td>
+            </tr>
+        </table>     
+    </div>
