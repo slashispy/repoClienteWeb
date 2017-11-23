@@ -51,9 +51,9 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <button *ngif="!userIdToUpdate">Crear</button>
-                    <button *ngif="userIdToUpdate">Actualizar</button>
-                    <button (click)="backToCreateUser()" *ngif="userIdToUpdate">Atras</button>
+                    <button *ngIf="!userIdToUpdate">Crear</button>
+                    <button *ngIf="userIdToUpdate">Actualizar</button>
+                    <button (click)="backToCreateUser()" *ngIf="userIdToUpdate">Atras</button>
                 </td>
             </tr>
         </table>
@@ -77,10 +77,10 @@
             </div>	
     </div>
 
-    <ng-template #processing>
+   <ng-template #processing>
         <img *ngIf="requestProcessing" src="assets/images/loading.gif">
     </ng-template>
-    </div>
+    <div>
         <h3>Usuarios</h3>
         <table>
             <tr>
@@ -105,3 +105,4 @@
             </tr>
         </table>     
     </div>
+</div>
