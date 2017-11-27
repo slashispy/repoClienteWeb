@@ -6,13 +6,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { UsuariosComponent } from './usuarios/usuarios.component';
-import { UsuarioService } from './services/usuario-service.service';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { UsuarioService } from './services/usuarios/usuario-service.service';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilService } from './services/perfil/perfil-service.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -23,11 +26,15 @@ import { UsuarioService } from './services/usuario-service.service';
     {
         path: 'usuarios',
         component: UsuariosComponent
+    },{
+        path: 'perfiles',
+        component: PerfilComponent
     }
     ])
   ],
   providers: [
-    UsuarioService
+    UsuarioService,
+    PerfilService
   ],
   bootstrap: [
     AppComponent

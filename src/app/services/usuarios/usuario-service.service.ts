@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import { Usuario } from 'app/classes/usuario';
 
 @Injectable()
@@ -10,6 +10,8 @@ export class UsuarioService {
   constructor(private http: Http) { }
 
   getAllUsers(): Observable<Usuario[]> {
+    let cpHeaders = new Headers({'Content-type' : 'application/json'});
+    let options = new RequestOptions({headers : cpHeaders});
     return this.http.get(this.usuarioUrl)
     .map(this.extractData)
     .catch(this.handleError);
@@ -26,7 +28,7 @@ export class UsuarioService {
   getUserById(usuarioId: string): Observable<Usuario> {
     let cpHeaders = new Headers({'Content-type' : 'application/json'});
     let options = new RequestOptions({headers : cpHeaders});
-    console.log(this.usuarioUrl + "/" + usuarioId);
+    console.log(this.usuarioUrl + usuarioId);
     return this.http.get(this.usuarioUrl + usuarioId)
     .map(this.extractData)
     .catch(this.handleError);

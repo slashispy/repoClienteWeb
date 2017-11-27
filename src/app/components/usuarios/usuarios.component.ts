@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { UsuarioService } from '../services/usuario-service.service';
-import { Usuario } from '../classes/usuario';
+import { UsuarioService } from '../../services/usuarios/usuario-service.service';
+import { Usuario } from '../../classes/usuario';
 
 @Component({
   selector: 'app-usuarios',
@@ -49,15 +49,6 @@ export class UsuariosComponent implements OnInit {
     this.preProcessConfigurations();
     let user = this.userForm.value;
     if (this.userIdToUpdate === null) {
-	    // Generados usuario id y creamos el usuario
-            this.usuarioService.getAllUsers()
-            .subscribe(users => {
-		   // Generamos id
-      let maxIndex = users.length - 1;
-      let userWithMaxIndex = users[maxIndex];
-      let userId = userWithMaxIndex.id + 1;
-      user.id = userId;
-		   // Creamos usuario
       this.usuarioService.createUser(user)
       .subscribe(successCode => {
           this.statusCode = successCode;
@@ -65,8 +56,7 @@ export class UsuariosComponent implements OnInit {
           this.backToCreateUser();
       },
         errorCode => this.statusCode = errorCode
-        );
-      });
+      );
     } else {
    	     //  actualizamos usuario
         user.id = this.userIdToUpdate;

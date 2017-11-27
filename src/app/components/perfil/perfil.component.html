@@ -1,0 +1,82 @@
+<h3 *ngIf="profileIdToUpdate; else create">
+  Actualizando Perfil con id: {{profileIdToUpdate}}
+</h3>
+
+<ng-template #create>
+  <h3> Crear Nuevo Perfil</h3>
+</ng-template>
+
+<div>
+  <form [formGroup]="profileForm" (ngSubmit)="onProfileFormSubmit()">
+    <table>
+      <tr>
+        <td with="100">Codigo</td>
+        <td><input formControlName="codigo" type="text"/>
+          <label *ngIf="profileForm.get('codigo').invalid && processValidation" [ngClass] = "'error'"> Codigo es requerido. </label>
+        </td>
+      </tr>
+      <tr>
+        <td with="100">Descripcion</td>
+        <td><input formControlName="descripcion" type="text"/>
+          <label *ngIf="profileForm.get('descripcion').invalid && processValidation" [ngClass] = "'error'"> Descripcion es requerido. </label>
+        </td>
+      </tr>
+      <tr>
+        <td with="100">Estado</td>
+        <td><input formControlName="estado" type="number"/>
+          <label *ngIf="profileForm.get('estado').invalid && processValidation" [ngClass] = "'error'"> Estado es requerido. </label>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <button *ngIf="!profileIdToUpdate">Crear</button>
+            <button *ngIf="profileIdToUpdate">Actualizar</button>
+            <button (click)="backToCreateProfile()" *ngIf="profileIdToUpdate">Atras</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <br/>
+  <div *ngIf="statusCode; else processing">
+    <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+      Perfil agregado correctamente.
+    </div>   
+    <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+      Perfil ya existe.
+    </div>   	
+    <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+      Perfil actualizado correctamente.
+    </div>   	      
+    <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+      Perfil borrado correctamente.
+    </div>   	   
+    <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+      Error Interno del Servidor.
+    </div>
+  </div>
+
+  <ng-template #processing>
+    <img *ngIf="requestProcessing" src="assets/images/loading.gif">
+  </ng-template>
+  <div>
+    <h3>Perfiles</h3>
+    <table>
+      <tr>
+          <th> Id</th> 
+          <th>Codigo</th>
+          <th>Descripcion</th>
+          <th>Estado</th>
+          <th></th>
+          <th></th>
+      </tr>
+      <tr *ngFor="let profile of allProfiles" >
+          <td>{{profile.id}}</td> 
+          <td>{{profile.codigo}}</td> 
+          <td>{{profile.descripcion}}</td>
+          <td>{{profile.estado}}</td>
+          <td><button type="button" (click)="loadProfileToEdit(profile.id)">Editar</button> </td> 
+          <td><button type="button" (click)="deleteProfile(profile.id)">Borrar</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
