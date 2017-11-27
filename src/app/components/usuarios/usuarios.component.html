@@ -45,7 +45,12 @@
             </tr>
             <tr>
                 <td width="100">Estado: </td>
-                <td><input formControlName="estado" type="number"/>
+                <td>
+                    <select formControlName="estado">
+                        <option value=1 selected>Activo</option>
+                        <option value=0>Inactivo</option>
+                    </select>
+                    <!--<input formControlName="estado" type="number"/>-->
                     <label *ngIf="userForm.get('estado').invalid && processValidation" [ngClass] = "'error'"> Estado es requerido. </label> 
                 </td>
             </tr>
