@@ -1,34 +1,20 @@
-h1 {
-    font-size: 2.0em;
-    margin: 20px 0 0 0;
-    font-weight: 400; 
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif 
-}
-h3 { 
-    color: blue;
-}
-table {
-    border-collapse: collapse;
-}
-table, th, td {
-    border: 1px solid black;
-    font-size:17px;
-}
-input {
-    width: 225px;
-    margin: 8px 0;
-    background-color: #dfdfdf;
-    font-size:17px;
-}
-button {
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif;
+color: #008CBA}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+
+table{
     background-color: #008CBA;
     color: white;
+    border: 1px solid white;
+    font-family: "Poppins", sans-serif
 }
-.error{
-    color: red;
-    font-size: 20px;
+
+body{
+    background-color: #008CBA
 }
-.success{
-    color: green;
-    font-size: 20px;
-} 
+
+/*.miClase{
+    background-color: #008CBA
+}*/

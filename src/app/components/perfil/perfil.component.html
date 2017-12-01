@@ -78,7 +78,8 @@
           <td>{{profile.id}}</td> 
           <td>{{profile.codigo}}</td> 
           <td>{{profile.descripcion}}</td>
-          <td>{{profile.estado}}</td>
+          <td *ngIf="profile.estado === 1">Activo</td>
+          <td *ngIf="profile.estado === 0">Inactivo</td>
           <td><button type="button" (click)="loadProfileToEdit(profile.id)">Editar</button> </td> 
           <td><button type="button" (click)="deleteProfile(profile.id)">Borrar</button></td>
       </tr>

@@ -1,0 +1,78 @@
+
+<!--<div>
+    <h2>Listado de Usuarios</h2>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre Completo</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuarioDto of allUsersDTO">
+                <td>{{usuarioDto.id}}</td>
+                <td>{{usuarioDto.nombreCompleto}}</td>
+                <td>{{usuarioDto.usuario}}</td>
+                <td>{{usuarioDto.email}}</td>
+                <td *ngIf="usuarioDto.estado === 1">Activo</td>
+                <td *ngIf="usuarioDto.estado === 0">Inactivo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>-->
+<br>
+<div>
+    <h2>Listado de Usuarios Activos</h2>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre Completo</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuarioDto of allUsersActivos">
+                <td>{{usuarioDto.id}}</td>
+                <td>{{usuarioDto.nombreCompleto}}</td>
+                <td>{{usuarioDto.usuario}}</td>
+                <td>{{usuarioDto.email}}</td>
+                <td *ngIf="usuarioDto.estado === 1">Activo</td>
+                <td *ngIf="usuarioDto.estado === 0">Inactivo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<div>
+    <h2>Listado de Usuarios Inactivos</h2>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre Completo</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuarioDto of allUserInactivos">
+                <td>{{usuarioDto.id}}</td>
+                <td>{{usuarioDto.nombreCompleto}}</td>
+                <td>{{usuarioDto.usuario}}</td>
+                <td>{{usuarioDto.email}}</td>
+                <td *ngIf="usuarioDto.estado === 1">Activo</td>
+                <td *ngIf="usuarioDto.estado === 0">Inactivo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

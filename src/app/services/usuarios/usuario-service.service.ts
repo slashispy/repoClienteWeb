@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Usuario } from 'app/classes/usuario';
+import { UsuarioDto } from 'app/classes/usuario-dto';
 
 @Injectable()
 export class UsuarioService {
@@ -13,6 +14,30 @@ export class UsuarioService {
     let cpHeaders = new Headers({'Content-type' : 'application/json'});
     let options = new RequestOptions({headers : cpHeaders});
     return this.http.get(this.usuarioUrl)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  getReporte(): Observable<UsuarioDto[]> {
+    let cpHeaders = new Headers({'Content-type' : 'application/json'});
+    let options = new RequestOptions({headers: cpHeaders});
+    return this.http.get(this.usuarioUrl + "reporte")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  getReporteActivos(): Observable<UsuarioDto[]> {
+    let cpHeaders = new Headers({'Content-type' : 'application/json'});
+    let options = new RequestOptions({headers: cpHeaders});
+    return this.http.get(this.usuarioUrl + "reporte/activos")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  getReporteInactivos(): Observable<UsuarioDto[]> {
+    let cpHeaders = new Headers({'Content-type' : 'application/json'});
+    let options = new RequestOptions({headers: cpHeaders});
+    return this.http.get(this.usuarioUrl + "reporte/inactivos")
     .map(this.extractData)
     .catch(this.handleError);
   }

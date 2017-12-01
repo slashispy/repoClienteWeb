@@ -104,7 +104,8 @@
                 <td>{{user.apellido}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.usuario}}</td>
-                <td>{{user.estado}}</td>
+                <td *ngIf="user.estado === 1">Activo</td>
+                <td *ngIf="user.estado === 0">Inactivo</td>
                 <td><button type="button" (click)="loadUserToEdit(user.id)">Editar</button> </td> 
                 <td><button type="button" (click)="deleteUser(user.id)">Borrar</button></td>
             </tr>
